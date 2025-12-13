@@ -1,0 +1,11 @@
+# Core backend (FastAPI side – teammate)
+fastapi
+uvicorn
+
+# ML / AI (your part)
+groq
+python-dotenv
+numpy
+
+# Optional but recommended (JSON handling / utils)
+pydantic
