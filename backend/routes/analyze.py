@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from services.policy_engine import bucketize
-from services.hash_utils import compute_hash
+from backend.services.policy_engine import bucketize
+from backend.services.hash_utils import compute_hash
 from ml.scorer import score_wallet
 from ai.explain import explain_wallet
 
