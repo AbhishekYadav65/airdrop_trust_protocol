@@ -2,52 +2,88 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Airdrop Trust Protocol</title>
+  <!-- Google Fonts for a professional look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <h1>Sybil-Resistant Airdrop Demo</h1>
+  <div class="container">
+    <header>
+      <h1>Sybil-Resistant Airdrop Demo</h1>
+      <p class="subtitle">Trust Protocol Analysis Dashboard</p>
+    </header>
 
-  <section>
-    <h2>Wallets</h2>
-    <textarea id="wallets" rows="4">
-0xA1
-0xA2
-0xB1
-    </textarea>
-    <button onclick="analyze()">Analyze</button>
-  </section>
+    <main>
+      <!-- Wallets Input Section -->
+      <section class="card">
+        <div class="card-header">
+          <h2>Wallets</h2>
+          <span class="badge">Input</span>
+        </div>
+        <div class="card-body">
+          <p class="instruction-text">Enter wallet addresses below (one per line):</p>
+          <textarea id="wallets" rows="4" placeholder="0xA1..."></textarea>
+          <div class="action-row">
+            <button class="btn-primary" onclick="analyze()">Analyze Wallets</button>
+          </div>
+        </div>
+      </section>
 
-  <section>
-    <h2>Analysis Result</h2>
-    <table id="analysisTable">
-      <thead>
-        <tr>
-          <th>Wallet</th>
-          <th>Sybil Score</th>
-          <th>Bucket</th>
-          <th>Explanation</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </section>
+      <!-- Analysis Result Section -->
+      <section class="card">
+        <div class="card-header">
+          <h2>Analysis Result</h2>
+          <span class="badge">Data</span>
+        </div>
+        <div class="table-wrapper">
+          <table id="analysisTable">
+            <thead>
+              <tr>
+                <th>Wallet</th>
+                <th>Sybil Score</th>
+                <th>Bucket</th>
+                <th>Explanation</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
 
-  <section>
-    <h2>Airdrop</h2>
-    <button onclick="runAirdrop()">Run Airdrop</button>
-    <table id="airdropTable">
-      <thead>
-        <tr>
-          <th>Wallet</th>
-          <th>Tokens</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </section>
+      <!-- Airdrop Section -->
+      <section class="card">
+        <div class="card-header">
+          <h2>Airdrop Distribution</h2>
+          <span class="badge">Execution</span>
+        </div>
+        <div class="card-body">
+          <button class="btn-secondary" onclick="runAirdrop()">Run Airdrop Distribution</button>
+          <div class="table-wrapper mt-4">
+            <table id="airdropTable">
+              <thead>
+                <tr>
+                  <th>Wallet</th>
+                  <th>Tokens</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
 
+    <footer>
+      <p>Powered by Trust Protocol</p>
+    </footer>
+  </div>
+
+  <!-- Logic preserved exactly as requested -->
   <script src="api.js"></script>
   <script src="app.js"></script>
 </body>
