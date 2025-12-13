@@ -1,27 +1,33 @@
 from fastapi import APIRouter
+from backend.services.trust_store import TRUST_STATE
 
 router = APIRouter()
 
-# MOCK TRUST MEMORY
-TRUST = {
-    "LOW": 100,
-    "MEDIUM": 50,
-    "HIGH": 10
+BASE_AIRDROP = 100
+
+BUCKET_WEIGHTS = {
+    "LOW": 1.0,
+    "MEDIUM": 0.5,
+    "HIGH": 0.1
 }
 
 @router.get("/airdrop")
 def airdrop():
-    demo_wallets = [
-        {"wallet": "0xA1", "bucket": "LOW"},
-        {"wallet": "0xA2", "bucket": "HIGH"},
-        {"wallet": "0xB1", "bucket": "MEDIUM"},
-    ]
-
     result = []
-    for w in demo_wallets:
+
+    for wallet, trust in TRUST_STATE.items():
+        bucket = trust["bucket"]
+        weight = BUCKET_WEIGHTS[bucket]
+
+        tokens = int(BASE_AIRDROP * weight)
+
         result.append({
-            "wallet": w["wallet"],
-            "tokens": TRUST[w["bucket"]]
+            "wallet": wallet,
+            "bucket": bucket,
+            "tokens": tokens
         })
 
-    return result
+    return {
+        "mode": "trust-weighted-airdrop",
+        "results": result
+    }
