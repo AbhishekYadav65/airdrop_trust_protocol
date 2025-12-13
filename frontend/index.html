@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Airdrop Trust Protocol</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <h1>Sybil-Resistant Airdrop Demo</h1>
+
+  <section>
+    <h2>Wallets</h2>
+    <textarea id="wallets" rows="4">
+0xA1
+0xA2
+0xB1
+    </textarea>
+    <button onclick="analyze()">Analyze</button>
+  </section>
+
+  <section>
+    <h2>Analysis Result</h2>
+    <table id="analysisTable">
+      <thead>
+        <tr>
+          <th>Wallet</th>
+          <th>Sybil Score</th>
+          <th>Bucket</th>
+          <th>Explanation</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Airdrop</h2>
+    <button onclick="runAirdrop()">Run Airdrop</button>
+    <table id="airdropTable">
+      <thead>
+        <tr>
+          <th>Wallet</th>
+          <th>Tokens</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <script src="api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
