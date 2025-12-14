@@ -1,3 +1,6 @@
+// =========================
+// Analyze Wallets
+// =========================
 async function analyze() {
   const wallets = document
     .getElementById("wallets")
@@ -7,14 +10,27 @@ async function analyze() {
 
   console.log("Analyzing wallets:", wallets);
 
-  const result = await post("/analyze", { wallets });
+  if (wallets.length === 0) {
+    alert("Please enter at least one wallet.");
+    return;
+  }
 
+  const result = await post("/analyze", { wallets });
   console.log("Analyze result:", result);
+
+  // 🔑 Backend returns { mode, wallets_analyzed, results: [...] }
+  const data = result.results;
+
+  if (!Array.isArray(data)) {
+    console.error("Analyze data is not an array:", result);
+    alert("Unexpected analyze response. Check console.");
+    return;
+  }
 
   const tbody = document.querySelector("#analysisTable tbody");
   tbody.innerHTML = "";
 
-  result.forEach(r => {
+  data.forEach(r => {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${r.wallet}</td>
@@ -26,21 +42,24 @@ async function analyze() {
   });
 }
 
+// =========================
+// Run Airdrop
+// =========================
 async function runAirdrop() {
   console.log("Calling /airdrop");
 
   const result = await get("/airdrop");
   console.log("Raw airdrop result:", result);
 
-  // 🔑 FIX 1: extract the actual array
+  // 🔑 Backend returns { mode, results: [...] }
   const data = result.results;
 
   if (!Array.isArray(data)) {
-    console.error("Airdrop data is not an array:", data);
+    console.error("Airdrop data is not an array:", result);
+    alert("Unexpected airdrop response. Check console.");
     return;
   }
 
-  // 🔑 FIX 2: get tbody (you were missing this)
   const tbody = document.querySelector("#airdropTable tbody");
   tbody.innerHTML = "";
 
@@ -48,6 +67,7 @@ async function runAirdrop() {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${r.wallet}</td>
+      <td>${r.bucket}</td>
       <td>${r.tokens}</td>
     `;
     tbody.appendChild(row);

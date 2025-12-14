@@ -4,10 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Airdrop Trust Protocol</title>
-  <!-- Google Fonts for a professional look -->
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -15,31 +20,43 @@
   <div class="container">
     <header>
       <h1>Sybil-Resistant Airdrop Demo</h1>
-      <p class="subtitle">Trust Protocol Analysis Dashboard</p>
+      <p class="subtitle">Trust Protocol – Analysis & Enforcement</p>
     </header>
 
     <main>
-      <!-- Wallets Input Section -->
+
+      <!-- Wallet Input -->
       <section class="card">
         <div class="card-header">
-          <h2>Wallets</h2>
-          <span class="badge">Input</span>
+          <h2>Wallet Input</h2>
+          <span class="badge">Step 1</span>
         </div>
+
         <div class="card-body">
-          <p class="instruction-text">Enter wallet addresses below (one per line):</p>
-          <textarea id="wallets" rows="4" placeholder="0xA1..."></textarea>
+          <p class="instruction-text">
+            Enter wallet addresses (one per line):
+          </p>
+          <textarea
+            id="wallets"
+            rows="4"
+            placeholder="0xA1&#10;0xA2&#10;0xB1"
+          ></textarea>
+
           <div class="action-row">
-            <button class="btn-primary" onclick="analyze()">Analyze Wallets</button>
+            <button class="btn-primary" onclick="analyze()">
+              Analyze Wallets
+            </button>
           </div>
         </div>
       </section>
 
-      <!-- Analysis Result Section -->
+      <!-- Analysis Results -->
       <section class="card">
         <div class="card-header">
-          <h2>Analysis Result</h2>
-          <span class="badge">Data</span>
+          <h2>Risk Analysis</h2>
+          <span class="badge">Step 2</span>
         </div>
+
         <div class="table-wrapper">
           <table id="analysisTable">
             <thead>
@@ -55,19 +72,24 @@
         </div>
       </section>
 
-      <!-- Airdrop Section -->
+      <!-- Airdrop -->
       <section class="card">
         <div class="card-header">
-          <h2>Airdrop Distribution</h2>
-          <span class="badge">Execution</span>
+          <h2>Airdrop Enforcement</h2>
+          <span class="badge">Step 3</span>
         </div>
+
         <div class="card-body">
-          <button class="btn-secondary" onclick="runAirdrop()">Run Airdrop Distribution</button>
+          <button class="btn-secondary" onclick="runAirdrop()">
+            Run Airdrop Distribution
+          </button>
+
           <div class="table-wrapper mt-4">
             <table id="airdropTable">
               <thead>
                 <tr>
                   <th>Wallet</th>
+                  <th>Bucket</th>
                   <th>Tokens</th>
                 </tr>
               </thead>
@@ -76,14 +98,15 @@
           </div>
         </div>
       </section>
+
     </main>
 
     <footer>
-      <p>Powered by Trust Protocol</p>
+      <p>Powered by Trust Protocol · ML + AI + Blockchain</p>
     </footer>
   </div>
 
-  <!-- Logic preserved exactly as requested -->
+  <!-- Scripts (ORDER MATTERS) -->
   <script src="api.js"></script>
   <script src="app.js"></script>
 </body>
