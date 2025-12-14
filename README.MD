@@ -25,7 +25,7 @@ http://127.0.0.1:8000/docs</a>
 
 ---
 
-## 1. One-Line Problem Statement (HOOK)
+## 1. One-Line Problem Statement 
 
 Airdrops fail because decentralized systems cannot distinguish humans from Sybil farms — and current solutions either trust black-box AI or central authorities.
 
@@ -121,8 +121,7 @@ We built a Sybil-resistant airdrop mechanism where:
 
 ---
 
-## 5. Frontend (What Judges See)
-
+## 5. Frontend 
 ### Purpose
 - Transparent visualization only
 - Zero authority
@@ -179,7 +178,7 @@ Computes a Sybil probability (0–1) using explainable features:
 - No enforcement
 - No randomness
 
-### Why judges care
+
 This respects blockchain constraints:
 - probabilistic insight stays off-chain
 - results are explainable and reproducible
@@ -259,7 +258,7 @@ It solves a blockchain-native problem:
 
 ---
 
-## 12. Demo Flow (What Judges See Live)
+## 12. Demo Flow 
 
 1. Input wallets
 2. Run analysis
