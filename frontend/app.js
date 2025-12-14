@@ -1,32 +1,47 @@
-// =========================
-// Analyze Wallets
-// =========================
-async function analyze() {
-  const wallets = document
-    .getElementById("wallets")
-    .value.split("\n")
+const loader = document.getElementById("loader");
+const statusText = document.getElementById("statusText");
+const analysisSection = document.getElementById("analysisSection");
+const airdropSection = document.getElementById("airdropSection");
+const textarea = document.getElementById("wallets");
+
+let debounceTimer = null;
+
+textarea.addEventListener("input", () => {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(runPipeline, 600);
+});
+
+async function runPipeline() {
+  const wallets = textarea.value
+    .split("\n")
     .map(w => w.trim())
     .filter(Boolean);
 
-  console.log("Analyzing wallets:", wallets);
+  if (wallets.length === 0) return;
 
-  if (wallets.length === 0) {
-    alert("Please enter at least one wallet.");
-    return;
-  }
+  resetUI();
+  showLoader("Analyzing wallets…");
 
-  const result = await post("/analyze", { wallets });
-  console.log("Analyze result:", result);
+  // ---- ANALYZE ----
+  const analyzeRes = await post("/analyze", { wallets });
+  renderAnalysis(analyzeRes.results);
 
-  // 🔑 Backend returns { mode, wallets_analyzed, results: [...] }
-  const data = result.results;
+  hideLoader();
+  analysisSection.classList.remove("hidden");
 
-  if (!Array.isArray(data)) {
-    console.error("Analyze data is not an array:", result);
-    alert("Unexpected analyze response. Check console.");
-    return;
-  }
+  // Small pause for UX clarity
+  await delay(600);
 
+  // ---- AIRDROP ----
+  showLoader("Running airdrop distribution…");
+  const airdropRes = await get("/airdrop");
+  renderAirdrop(airdropRes.results);
+
+  hideLoader();
+  airdropSection.classList.remove("hidden");
+}
+
+function renderAnalysis(data) {
   const tbody = document.querySelector("#analysisTable tbody");
   tbody.innerHTML = "";
 
@@ -42,24 +57,7 @@ async function analyze() {
   });
 }
 
-// =========================
-// Run Airdrop
-// =========================
-async function runAirdrop() {
-  console.log("Calling /airdrop");
-
-  const result = await get("/airdrop");
-  console.log("Raw airdrop result:", result);
-
-  // 🔑 Backend returns { mode, results: [...] }
-  const data = result.results;
-
-  if (!Array.isArray(data)) {
-    console.error("Airdrop data is not an array:", result);
-    alert("Unexpected airdrop response. Check console.");
-    return;
-  }
-
+function renderAirdrop(data) {
   const tbody = document.querySelector("#airdropTable tbody");
   tbody.innerHTML = "";
 
@@ -72,4 +70,24 @@ async function runAirdrop() {
     `;
     tbody.appendChild(row);
   });
+}
+
+function resetUI() {
+  analysisSection.classList.add("hidden");
+  airdropSection.classList.add("hidden");
+  statusText.textContent = "";
+}
+
+function showLoader(text) {
+  loader.classList.remove("hidden");
+  statusText.textContent = text;
+}
+
+function hideLoader() {
+  loader.classList.add("hidden");
+  statusText.textContent = "";
+}
+
+function delay(ms) {
+  return new Promise(res => setTimeout(res, ms));
 }
