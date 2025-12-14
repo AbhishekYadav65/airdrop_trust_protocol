@@ -1,20 +1,29 @@
 # AIRDROP-TRUST-PROTOCOL
 
+> Open Terminal (1)
 ``` 
 git clone https://github.com/AbhishekYadav65/airdrop_trust_protocol 
 
-
 pip install -r requirements.txt
-
-
+```
+```
+cd blockchain
+npx hardhat node
+```
+> Open Terminal (2)
+```
 uvicorn backend.main:app --reload 
-
+```
+> Open Terminal (3)
+```
+cd frontend
+python -m http.server 5500
 ```
 
 ### Then click on 
 <a href="
-http://127.0.0.1:8000/docs">
-http://127.0.0.1:8000/docs</a>
+http://localhost:5500/">
+Landing Page</a>
 
 
 

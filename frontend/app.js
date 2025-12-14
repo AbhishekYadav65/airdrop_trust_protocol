@@ -24,12 +24,11 @@ async function runPipeline() {
 
   // ---- ANALYZE ----
   const analyzeRes = await post("/analyze", { wallets });
-  renderAnalysis(analyzeRes.results);
+  renderAnalysis(analyzeRes.results);   // ✅ FIX
 
   hideLoader();
   analysisSection.classList.remove("hidden");
 
-  // Small pause for UX clarity
   await delay(600);
 
   // ---- AIRDROP ----
