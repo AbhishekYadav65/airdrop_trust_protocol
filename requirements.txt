@@ -9,3 +9,4 @@ numpy
 
 # Optional but recommended (JSON handling / utils)
 pydantic
+web3
